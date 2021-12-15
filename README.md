@@ -15,6 +15,8 @@ The main aim is to use PHP alongside with Java.
 The base system will be java and I'm gonna use `Apcahe-lucecne` for indexing, then a PHP wrapper will be implemented over base system to prepare APIs and eventually to run the engine as a website.
 I'll probably use modular structures to provide APIs.
 
+I intend to implement a decent web-crawler for the project later.
+
 Let's see how it goes.
 
 ## Development Info
