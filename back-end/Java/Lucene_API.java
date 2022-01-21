@@ -65,7 +65,7 @@ public class Lucene_API {
 
           IndexReader reader = DirectoryReader.open(FSDirectory.open(new File(indexPath)));
           IndexSearcher searcher = new IndexSearcher(reader);
-          TopScoreDocCollector collector = TopScoreDocCollector.create(20, true);
+          TopScoreDocCollector collector = TopScoreDocCollector.create(100, true);
           Query q = new QueryParser(Version.LUCENE_40, "contents", analyzer).parse(args[1]);
           searcher.search(q, collector);
           ScoreDoc[] hits = collector.topDocs().scoreDocs;
