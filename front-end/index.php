@@ -1,8 +1,30 @@
 
 <?php
 
+$result = "";
 
+if ( isset( $_GET["q"] ) && ( trim($_GET["q"]) != "" ) ) {
 
+    require_once "Lucene_API.php";
+    $lucene_api = new Lucene_API;
+    $result = $lucene_api -> query( $_GET["q"] );
+    if (strpos($result, 'hits') !== false) {
+        $result_array = explode( PHP_EOL , trim($result) );
+        $result = "Search results for: <b>" . $_GET["q"] . "</b><br>" . trim($result_array[0]) . "<br><br><br>";
+        unset( $result_array[0] );
+        foreach ($result_array as $key => $value) {
+            $array = explode( " " , trim( $value ) );
+            $result .= "<a href=\"" . $array[1] . "\">" . $array[1] . "</a><br>" .
+            "<span style=\"color:green;\" >" . $array[1] . "</span><br>" .
+            $array[0] . " Rank = " . $key . " Document " . $array[2] . "<br><br>";
+        }
+    }
+    else {
+        $result = "ERROR : No doucument indexed?";
+    }
+    
+    
+}
 
 
 ?>
@@ -38,7 +60,18 @@
         display: flex;
         justify-content: center;
     }
-    
+    #candle_result{
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    .result{
+        color : white;
+        width : 960px;
+    }
+
+
     #caption{
         color : white;
         align-items: center;
@@ -92,9 +125,14 @@
             </div>
 
         </form>
-
     </div>
-    
+
+    <div id="candle_result" >
+        <div class="result" >
+            <?php echo $result; ?> 
+        </div>
+    </div>
+
 </div>
 
 
