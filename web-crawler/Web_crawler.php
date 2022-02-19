@@ -12,7 +12,7 @@ class Web_crawler
         $this->enable_log = $enable_log;
     }
 
-    public function crawl_url(String $url , $depth = 0)
+    public function crawl_url(String $url , $depth = PHP_INT_MAX)
     {
         while (true) {
             # code...
@@ -37,6 +37,11 @@ class Web_crawler
     public disableLog( )
     {
         $this->enable_log = FALSE;
+    }
+
+    private function fetchUrlHyperLinks( string $html )
+    {
+        # code...
     }
     
 }
