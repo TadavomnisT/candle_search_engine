@@ -2,7 +2,8 @@
 
 
 
-## How does it works?
+
+## How does it work?
 
 Basically, assume that we give crawler a URL to start with:
 
