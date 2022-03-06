@@ -62,11 +62,9 @@ class Web_crawler
     private function fetchHyperLinks( string $contents )
     {
         $pattern = '~[a-z]+://\S+~';
-        if($num_found = preg_match_all($pattern, $html, $out))
-        {
-            echo "FOUND ".$num_found." LINKS:\n";
-            var_dump($out);
-        }
+        if( preg_match_all( $pattern, $contents, $links ) )
+            return $links;
+        return false;
     }
 
     private function getUrlContents( string $url )
