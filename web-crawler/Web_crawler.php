@@ -29,32 +29,32 @@ class Web_crawler
         }
     }
 
-    public setBlackList( $black_list = [] )
+    public function setBlackList( $black_list = [] )
     {
         $this->black_list = $black_list;
     }
 
-    public getBlackList( )
+    public function getBlackList( )
     {
         return $this->black_list;
     }
 
-    public setProxy( $proxy = FALSE )
+    public function setProxy( $proxy = FALSE )
     {
         $this->proxy = $proxy;
     }
 
-    public getProxy( )
+    public function getProxy( )
     {
         return $this->proxy;
     }
 
-    public enableLog( )
+    public function enableLog( )
     {
         $this->enable_log = TRUE;
     }
     
-    public disableLog( )
+    public function disableLog( )
     {
         $this->enable_log = FALSE;
     }
@@ -85,7 +85,7 @@ class Web_crawler
         return $data;
     }
 
-    ===============================TESING=================================
+    // ===============================TESING=================================
     public function test_fetchHyperLinks($contents)
     {
         return $this->fetchHyperLinks( $contents );
