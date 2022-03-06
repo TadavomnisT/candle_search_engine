@@ -1,6 +1,11 @@
 <?php
 
-
+/*
+Proxy format: [ "proxy_type" => "host:port" ]
+    Examle:
+    $proxy = [ "http" => "127.0.0.1:8585" ];
+    $proxy = [ "socks" => "127.0.0.1:9050" ];
+*/
 
 class Web_crawler
 {
@@ -13,7 +18,7 @@ class Web_crawler
         $this->proxy = $proxy;
     }
 
-    public function crawl_url(String $url , $depth = PHP_INT_MAX)
+    public function crawl_url(String $url , $max_degree = 0 , $depth = PHP_INT_MAX)
     {
         while (true) {
             $this->fetchHyperLinks( 
@@ -66,7 +71,28 @@ class Web_crawler
 
     private function getUrlContents( string $url )
     {
-        # code... 
+        $ch = curl_init (); 
+        curl_setopt ($ch, CURLOPT_URL, $url); 
+        if ( isset( $this->proxy["socks"] ) || isset( $this->proxy["http"] ) )
+            curl_setopt ($ch, CURLOPT_PROXY, ( isset( $this->proxy["http"] ) ) ? $this->proxy["http"] : $this->proxy["socks"] ); 
+        if ( isset( $this->proxy["socks"] ) )
+            curl_setopt ($ch, CURLOPT_PROXYTYPE, 7);        
+        curl_setopt ($ch, CURLOPT_RETURNTRANSFER, TRUE); 
+        curl_setopt ($ch, CURLOPT_FAILONERROR, true); 
+        curl_setopt ($ch, CURLOPT_FOLLOWLOCATION, 1); 
+        $data = curl_exec($ch); 
+        curl_close ($ch);
+        return $data;
+    }
+
+    ===============================TESING=================================
+    public function test_fetchHyperLinks($contents)
+    {
+        return $this->fetchHyperLinks( $contents );
+    }
+    public function test_getUrlContents($url)
+    {
+        return $this-> getUrlContents ( $url );
     }
     
 }
