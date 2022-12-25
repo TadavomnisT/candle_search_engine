@@ -135,6 +135,6 @@ var_dump( $result );
 * Contact: http://TadavomnisT.iR , t.me/TadavomnisT
 
 ## License
-* Opened source so, ... :)
+*  GPL-3.0 license 
 
 Have fun!
